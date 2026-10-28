@@ -1,0 +1,58 @@
+=== python lab3_search.py ===
+BFS visit order: A -> B -> C -> D -> E -> F -> G
+BFS final path: A -> B -> D -> G
+Trace (frontier shown after removing/processing current node, before adding successors):
+  1. processed=A; frontier_after_pop=[[]]; path=['A']
+  2. processed=B; frontier_after_pop=[C]; path=['A', 'B']
+  3. processed=C; frontier_after_pop=[D, E]; path=['A', 'C']
+  4. processed=D; frontier_after_pop=[E, F]; path=['A', 'B', 'D']
+  5. processed=E; frontier_after_pop=[F, G]; path=['A', 'B', 'E']
+  6. processed=F; frontier_after_pop=[G]; path=['A', 'C', 'F']
+  7. processed=G; frontier_after_pop=[[]]; path=['A', 'B', 'D', 'G']
+DFS visit order: A -> B -> D -> G
+DFS final path: A -> B -> D -> G
+Trace (frontier shown after removing/processing current node, before adding successors):
+  1. processed=A; frontier_after_pop=[[]]; path=['A']
+  2. processed=B; frontier_after_pop=[C]; path=['A', 'B']
+  3. processed=D; frontier_after_pop=[C, E]; path=['A', 'B', 'D']
+  4. processed=G; frontier_after_pop=[C, E]; path=['A', 'B', 'D', 'G']
+
+=== python lab3_depth_search.py ===
+DLS limit=1: status=CUTOFF; path=None; visit_order=['A', 'B', 'C']
+DLS limit=2: status=CUTOFF; path=None; visit_order=['A', 'B', 'D', 'E', 'C', 'F']
+DLS limit=3: status=FOUND; path=['A', 'B', 'D', 'G']; visit_order=['A', 'B', 'D', 'G']
+DLS limit=4: status=FOUND; path=['A', 'B', 'D', 'G']; visit_order=['A', 'B', 'D', 'G']
+IDDFS max_depth=1: status=CUTOFF; path=None; limits_attempted=[0, 1]
+  attempt statuses=[(0, 'CUTOFF'), (1, 'CUTOFF')]; cumulative_visit_order=['A', 'A', 'B', 'C']
+IDDFS max_depth=2: status=CUTOFF; path=None; limits_attempted=[0, 1, 2]
+  attempt statuses=[(0, 'CUTOFF'), (1, 'CUTOFF'), (2, 'CUTOFF')]; cumulative_visit_order=['A', 'A', 'B', 'C', 'A', 'B', 'D', 'E', 'C', 'F']
+IDDFS max_depth=3: status=FOUND; path=['A', 'B', 'D', 'G']; limits_attempted=[0, 1, 2, 3]
+  attempt statuses=[(0, 'CUTOFF'), (1, 'CUTOFF'), (2, 'CUTOFF'), (3, 'FOUND')]; cumulative_visit_order=['A', 'A', 'B', 'C', 'A', 'B', 'D', 'E', 'C', 'F', 'A', 'B', 'D', 'G']
+IDDFS max_depth=4: status=FOUND; path=['A', 'B', 'D', 'G']; limits_attempted=[0, 1, 2, 3]
+  attempt statuses=[(0, 'CUTOFF'), (1, 'CUTOFF'), (2, 'CUTOFF'), (3, 'FOUND')]; cumulative_visit_order=['A', 'A', 'B', 'C', 'A', 'B', 'D', 'E', 'C', 'F', 'A', 'B', 'D', 'G']
+
+=== python lab3_ucs.py ===
+Weighted edges:
+  A-B: 1
+  A-C: 2
+  B-D: 1
+  B-E: 2
+  C-F: 1
+  D-G: 10
+  E-G: 2
+  F-G: 2
+UCS processing order: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+UCS path: A -> B -> E -> G
+UCS returned cost: 5
+Independent path-cost sum: 5
+BFS processing order: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+BFS fewest-hop path: A -> B -> D -> G
+BFS route cost on same topology: 12
+UCS trace (node, accumulated cost, frontier after pop):
+  ('A', 0, [])
+  ('B', 1, [('C', 2)])
+  ('C', 2, [('D', 2), ('E', 3)])
+  ('D', 2, [('E', 3), ('F', 3)])
+  ('E', 3, [('F', 3), ('G', 12)])
+  ('F', 3, [('G', 5), ('G', 12)])
+  ('G', 5, [('G', 12)])
